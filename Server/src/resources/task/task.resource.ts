@@ -1,12 +1,12 @@
-import Task from "../task/schemas/task.schema.js"
-import { ICreateTaskQuery, ICreateTaskResult, IGetAllTasksResult, IGetTaskByIdResult } from "../../models/task.models.js";
+import TaskDefinition from "./schemas/taskDefinition.schema.js"
+import { CreateTaskDefinitionQuery, ICreateTaskDefinitionQuery, ICreateTaskDefinitionResult, IGetAllTaskDefinitionsResult, IGetTaskDefinitionByIdResult } from "../../models/task.models.js";
 
-export async function GetAllTasksAsync(): Promise<IGetAllTasksResult> {
-    let tasksModels = await Task.find();
+export async function GetAllTaskDefinitionsAsync(): Promise<IGetAllTaskDefinitionsResult> {
+    let tasksModels = await TaskDefinition.find();
 
-    let result: IGetAllTasksResult = { tasks: [] }
+    let result: IGetAllTaskDefinitionsResult = { taskDefinitions: [] }
 
-    result.tasks = tasksModels.map((item) => {
+    result.taskDefinitions = tasksModels.map((item) => {
         return {
             id: item._id.toString(),
             title: item.title,
@@ -17,8 +17,8 @@ export async function GetAllTasksAsync(): Promise<IGetAllTasksResult> {
     return result;
 }
 
-export async function CreateTaskAsync(query: ICreateTaskQuery): Promise<ICreateTaskResult> {
-    const taskModel = new Task({
+export async function CreateTaskDefinitionAsync(query: CreateTaskDefinitionQuery): Promise<ICreateTaskDefinitionResult> {
+    const taskModel = new TaskDefinition({
         title: query.title,
         frequency: query.frequency
     })
@@ -28,8 +28,9 @@ export async function CreateTaskAsync(query: ICreateTaskQuery): Promise<ICreateT
     return { id: taskModel._id.toString() }
 }
 
-export async function GetTaskByIdAsync(id: string): Promise<IGetTaskByIdResult | null> {
-    let taskModel = await Task.findById(id);
+export async function GetTaskDefinitionByIdAsync(id: string): Promise<IGetTaskDefinitionByIdResult | null> {
+    console.log("", id)
+    let taskModel = await TaskDefinition.findById(id);
 
     if (taskModel == null) {
         return null;

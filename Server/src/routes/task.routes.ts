@@ -3,8 +3,8 @@ import * as taskController from "../controllers/task/task.controller.js"
 
 var router = express.Router();
 
-router.get("/", taskController.GetAllTasksAsync)
-router.post("/", taskController.CreateTaskAsync);
-router.get("/:id", taskController.GetTaskByIdAsync);
+router.get("/", taskController.GetAllTaskDefinitionsAsync);
+router.post("/", taskController.CreateTaskDefinitionAsync);
+router.get("/:id", taskController.GetTaskDefinitionByIdAsync);
 
 export default router;

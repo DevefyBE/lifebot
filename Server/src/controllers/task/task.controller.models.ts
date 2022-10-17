@@ -1,29 +1,29 @@
 import { TaskFrequency } from "../../enums/taskFrequency.js"
 
-export interface IGetAllTasksResponse{
-    tasks: IGetAllTasksResponseItem[]
+export interface IGetAllTaskDefinitionsResponse{
+    taskDefinitions: IGetAllTaskDefinitionsResponseItem[]
 }
 
-export interface IGetAllTasksResponseItem{
+export interface IGetAllTaskDefinitionsResponseItem{
     id: string
     title: string,
     frequency: TaskFrequency
 }
 
-export interface IGetTaskByIdRequestModel {
+export interface IGetTaskDefinitionByIdRequestModel {
     id: string
 }
 
-export interface IGetTaskByIdResponseModel {
+export interface IGetTaskDefinitionByIdResponseModel {
     title: string,
     frequency?: TaskFrequency
 }
 
-export interface ICreateTaskRequestModel {
+export interface ICreateTaskDefinitionRequestModel {
     title: string,
     frequency?: TaskFrequency
 }
 
-export interface ICreateTaskResponseModel {
+export interface ICreateTaskDefinitionResponseModel {
     id: string
 }

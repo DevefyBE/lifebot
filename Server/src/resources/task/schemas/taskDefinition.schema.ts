@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import { TaskFrequency } from "../../../enums/taskFrequency.js"
 
-const taskSchema = new mongoose.Schema({
+const taskDefinitionSchema = new mongoose.Schema({
     title: { 
         type: String, 
         required: true 
@@ -13,4 +13,4 @@ const taskSchema = new mongoose.Schema({
     }
 })
 
-export default mongoose.model("Task", taskSchema)
+export default mongoose.model("TaskDefinition", taskDefinitionSchema)

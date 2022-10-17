@@ -1,23 +1,28 @@
-import { TaskFrequency } from "../../enums/taskFrequency.js";
 import * as taskResource from "../../resources/task/task.resource.js"
-import { ICreateTaskQuery, ICreateTaskResult, IGetAllTasksResult, IGetTaskByIdResult } from "../../models/task.models.js";
+import { CreateTaskDefinitionQuery, ICreateTaskDefinitionQuery, ICreateTaskDefinitionResult, IGetAllTaskDefinitionsResult, IGetTaskDefinitionByIdResult } from "../../models/task.models.js";
 
-export async function GetAllTasksAsync() : Promise<IGetAllTasksResult>{
-    return await taskResource.GetAllTasksAsync();
+export async function GetAllTaskDefinitionsAsync(): Promise<IGetAllTaskDefinitionsResult> {
+    return await taskResource.GetAllTaskDefinitionsAsync();
 }
 
-export function CreateTaskAsync(query: ICreateTaskQuery): Promise<ICreateTaskResult> {
-    if (query.frequency == undefined) {
-        query.frequency = TaskFrequency.None;
-    }
+export function CreateTaskDefinitionAsync(query: CreateTaskDefinitionQuery): Promise<ICreateTaskDefinitionResult> {
+    if(query.ValidateTaskDefinition()){
+        throw Error("Query is not valid!");
+    };
 
-    return taskResource.CreateTaskAsync(query);
+    return taskResource.CreateTaskDefinitionAsync(query);
 }
 
-export async function GetTaskByIdAsync(id: string): Promise<IGetTaskByIdResult | null> {
+export async function GetTaskDefinitionByIdAsync(id: string): Promise<IGetTaskDefinitionByIdResult | null> {
     if (id == "") {
         throw Error("id can not be an empty string")
     }
 
-    return await taskResource.GetTaskByIdAsync(id);
+    return await taskResource.GetTaskDefinitionByIdAsync(id);
+}
+
+export async function CreateTaskInstances(): Promise<void> {
+    let taskDefinitions = await taskResource.GetAllTaskDefinitionsAsync();
+
+
 }
